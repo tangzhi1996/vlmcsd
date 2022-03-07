@@ -12,3 +12,41 @@ man man/vlmcsd.7
 
 If you don't have man, you may also use the .txt, .html and .pdf files
 in the man directory
+下载vlmcsd项目文件：
+
+yum -y install wget     （安装wget）
+
+wget https://github.com/Wind4/vlmcsd/releases/download/svn1111/binaries.tar.gz     （下载binaries包）
+
+tar -zxf binaries.tar.gz     （解压到当前目录下）
+
+如果你的机器CPU和上述我的一样都是Intel，那么就可以直接用我下面的命令进入目录
+
+cd binaries/Linux/intel/static
+
+这里我是X64位的系统，所以直接执行下面的命令vlmcsd就启动了
+
+./vlmcsd-x64-musl-static
+
+如果你的机器不是64位系统，则需要在此目录内找到对应你系统位数的可执行文件来运行
+查看vlmcsd的运行情况，可以使用如下命令
+
+ps -ef | grep vlmcsd-x64-musl-static
+
+ms服务器搭建完成
+
+设置vlmcsd 开机自启动：
+
+echo "/home/binaries/Linux/intel/static/vlmcsd-x64-musl-static > /dev/null 2>&1" >> /etc/rc.local
+
+chmod +x /etc/rc.d/rc.local
+
+激活测试：管理员下运行cmd
+
+slmgr /skms 填写kms服务器的IP    （指向激活服务器）
+
+slmgr  /ato                                       （激活系统）
+slmgr /xpr                                           （批量激活系统）
+
+
+slmgr /dlv    (查看激活信息)
